@@ -1,0 +1,17 @@
+.gcloudignore
+.git
+.gitignore
+
+# Ignore Java build artifacts
+target/
+*.jar
+
+# Ignore Node/Angular artifacts
+node_modules/
+dist/
+.angular/
+
+# Ignore IDE settings
+.idea/
+.vscode/
+*.swp

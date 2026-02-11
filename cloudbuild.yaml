@@ -1,0 +1,30 @@
+steps:
+  # Step 1: Build the Docker Image
+  # This replaces your 'docker build' command
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/my-backend-repo/hello-boot:latest', '.']
+
+  # Step 2: Push the Image to Artifact Registry
+  # This replaces your 'docker push' command
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/my-backend-repo/hello-boot:latest']
+
+  # Step 3: Deploy to Cloud Run
+  # This replaces your 'gcloud run deploy' command
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'hello-world-service'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-backend-repo/hello-boot:latest'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+# We tell Cloud Build which image we expect to be created
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-backend-repo/hello-boot:latest'
