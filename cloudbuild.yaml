@@ -28,3 +28,7 @@ steps:
 # We tell Cloud Build which image we expect to be created
 images:
   - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-backend-repo/hello-boot:latest'
+
+# --- ADD THIS SECTION BELOW ---
+options:
+  logging: CLOUD_LOGGING_ONLY
